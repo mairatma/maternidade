@@ -4,14 +4,16 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const {babies = [{name: 'Joaquim'}]} = this.props
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Maternidade Bello</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          Bebês registrados:
+          <br /><br />
+          {babies.map(baby => <div>{baby.name}</div>)}
         </p>
       </div>
     );
