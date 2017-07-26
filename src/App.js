@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends Component {
   render() {
-    const {data: {babies = []}} = this.props
+    const {data: {babies = [], loading, error}} = this.props
     return (
       <div className="App">
         <div className="App-header">
@@ -12,7 +12,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
           Bebês registrados:
-          {babies.map(baby => {
+          {!loading && babies.map(baby => {
             return (
               <div key={baby.id} style={{margin: 50}}>
                 <img src={baby.photoUri} width="200"/>
@@ -20,6 +20,8 @@ class App extends Component {
               </div>
             )
           })}
+          {loading && <span>Loading...</span>}
+          {error && <div>Error fetching babies: {error.message}</div>}
         </p>
       </div>
     );
