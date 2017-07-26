@@ -15,8 +15,8 @@ class App extends Component {
           {!loading && babies.map(baby => {
             return (
               <div key={baby.id} style={{margin: 50}}>
-                <img src={baby.photoUri} width="200"/>
                 <div>{baby.name}</div>
+                <img src={baby.photoUri} width="50%"/>
               </div>
             )
           })}
