@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {gql, graphql} from 'react-apollo';
 import './App.css';
 
 class App extends Component {
   render() {
-    const {babies = [{name: 'Joaquim'}]} = this.props
+    const {data: {babies = []}} = this.props
     return (
       <div className="App">
         <div className="App-header">
@@ -12,12 +12,28 @@ class App extends Component {
         </div>
         <p className="App-intro">
           Bebês registrados:
-          <br /><br />
-          {babies.map(baby => <div>{baby.name}</div>)}
+          {babies.map(baby => {
+            return (
+              <div key={baby.id} style={{margin: 50}}>
+                <img src={baby.photoUri} width="200"/>
+                <div>{baby.name}</div>
+              </div>
+            )
+          })}
         </p>
       </div>
     );
   }
 }
 
-export default App;
+const query = gql`
+  {
+    babies {
+      id
+      name
+      photoUri
+    }
+  }
+`
+
+export default graphql(query)(App);
